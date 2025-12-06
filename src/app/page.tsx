@@ -34,8 +34,6 @@ export default async function Home() {
 async function getLeaderboardData(): Promise<LeaderboardData> {
   const baseUrl = getBaseUrl();
 
-  console.log('MY_REG baseUrl: ', baseUrl);
-
   const response = await fetch(`${baseUrl}/api/leaderboard`, {
     next: { revalidate: 960 },
     method: 'GET',
@@ -53,11 +51,5 @@ function getBaseUrl() {
         return 'http://localhost:3000';
     }
 
-    const vercelUrl = process.env.VERCEL_URL;
-
-    if (!vercelUrl) {
-        throw new Error('VERCEL_URL is not set');
-    }
-
-    return `https://${vercelUrl}`;
+    return `https://advento-of-code-leaderboard.vercel.app`;
 }
