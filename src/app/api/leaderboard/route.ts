@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 
-// Mock data - replace with your actual data fetching logic
+const AOC_LEADERBOARD_ID = '4491394';
+
 const mockData = {
   "event": "2025",
   "num_days": 12,
@@ -55,10 +56,27 @@ const mockData = {
 };
 
 export async function GET() {
-  // Add your actual data fetching logic here
-  // const response = await fetch('https://adventofcode.com/...');
-  // const data = await response.json();
-  
-  return NextResponse.json(mockData);
+    const session = process.env.SESSION;
+
+    if (!session) {
+        console.error('AOC_SESSION is not set – returning mock data');
+    }
+
+    const url = `https://adventofcode.com/2025/leaderboard/private/view/${AOC_LEADERBOARD_ID}.json`;
+
+    try {
+        const res = await fetch(url, {
+            headers: {
+                Cookie: `session=${session}`,
+            },
+            next: { revalidate: 960 },
+        });
+
+        const data = await res.json();
+        return NextResponse.json(data);
+    } catch (error) {
+        console.error('Error fetching AoC leaderboard:', error);
+        return NextResponse.error()
+    }
 }
 
