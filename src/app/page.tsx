@@ -1,20 +1,6 @@
 import { LeaderboardData } from '@/types/leaderboard';
 import { Header, StatsOverview, Footer, LeaderboardClient } from './components';
 
-async function getLeaderboardData(): Promise<LeaderboardData> {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-
-  const response = await fetch(`${baseUrl}/api/leaderboard`, {
-    next: { revalidate: 960 },
-  });
-
-  if (!response.ok) {
-    throw new Error(`Failed to fetch leaderboard data: ${response.status}`);
-  }
-
-  return response.json();
-}
-
 export default async function Home() {
   const data = await getLeaderboardData();
 
@@ -43,4 +29,32 @@ export default async function Home() {
       </div>
     </div>
   );
+}
+
+async function getLeaderboardData(): Promise<LeaderboardData> {
+  const baseUrl = getBaseUrl();
+
+  const response = await fetch(`${baseUrl}/api/leaderboard`, {
+    next: { revalidate: 960 },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch leaderboard data: ${response.status}`);
+  }
+
+  return response.json();
+}
+
+function getBaseUrl() {
+    if (process.env.NODE_ENV === 'development') {
+        return 'http://localhost:3000';
+    }
+
+    const vercelUrl = process.env.VERCEL_URL;
+
+    if (!vercelUrl) {
+        throw new Error('VERCEL_URL is not set');
+    }
+
+    return `https://${vercelUrl}`;
 }
