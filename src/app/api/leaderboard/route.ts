@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-const AOC_LEADERBOARD_ID = '4491394';
+const AOC_LEADERBOARD_ID = '5177355';
 
 export async function GET() {
     const session = process.env.SESSION;
