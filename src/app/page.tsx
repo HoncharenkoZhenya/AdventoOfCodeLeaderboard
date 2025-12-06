@@ -33,9 +33,12 @@ export default async function Home() {
 
 async function getLeaderboardData(): Promise<LeaderboardData> {
   const baseUrl = getBaseUrl();
+  
+  console.log('MY_REG baseUrl: ', baseUrl);
 
   const response = await fetch(`${baseUrl}/api/leaderboard`, {
     next: { revalidate: 960 },
+    method: 'GET',
   });
 
   if (!response.ok) {
