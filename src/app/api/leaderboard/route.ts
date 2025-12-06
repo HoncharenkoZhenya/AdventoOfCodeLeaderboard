@@ -19,10 +19,12 @@ export async function GET() {
         });
 
         const data = await res.json();
+
         return NextResponse.json(data);
     } catch (error) {
         console.error('Error fetching AoC leaderboard:', error);
-        return NextResponse.error()
+
+        return NextResponse.error();
     }
 }
 

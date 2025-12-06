@@ -6,9 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint --fix"
   },
   "dependencies": {
+    "@stylistic/eslint-plugin": "^5.6.1",
+    "@typescript-eslint/eslint-plugin": "^8.48.1",
+    "@typescript-eslint/parser": "^8.48.1",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-lookbehind-assertions": "^1.0.3",
+    "eslint-plugin-newline-destructuring": "^1.2.2",
     "next": "16.0.7",
     "react": "19.2.1",
     "react-dom": "19.2.1"
