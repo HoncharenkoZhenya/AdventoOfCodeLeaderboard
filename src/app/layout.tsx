@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-    title: 'Advent of Code 2025 Leaderboard',
-    description: 'Private leaderboard visualization for Advent of Code 2025',
+    title: 'Advent of Code Leaderboard',
+    description: 'Private leaderboard visualization for Advent of Code',
 };
 
 export default function RootLayout({

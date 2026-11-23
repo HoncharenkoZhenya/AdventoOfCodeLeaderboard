@@ -13,7 +13,7 @@ export function StatsOverview({ totalMembers, activeMembers, totalStars, numDays
             <StatBox label="Total Members" value={totalMembers} />
             <StatBox label="Active Members" value={activeMembers} />
             <StatBox label="Total Stars" value={totalStars} />
-            <StatBox label="Days Released" value={numDays} />
+            <StatBox label="Total Days" value={numDays} />
         </section>
     );
 }
