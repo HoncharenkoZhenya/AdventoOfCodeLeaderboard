@@ -15,9 +15,9 @@
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-lookbehind-assertions": "^1.0.3",
     "eslint-plugin-newline-destructuring": "^1.2.2",
-    "next": "16.0.7",
-    "react": "19.2.1",
-    "react-dom": "19.2.1"
+    "next": "16.4.6",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "4.1.17",
@@ -25,7 +25,7 @@
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
     "eslint": "9.39.1",
-    "eslint-config-next": "16.0.7",
+    "eslint-config-next": "16.4.6",
     "tailwindcss": "4.1.17",
     "typescript": "5.9.3"
   }

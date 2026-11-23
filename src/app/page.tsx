@@ -10,16 +10,16 @@ import { Header, StatsOverview, Footer, LeaderboardClient } from './components';
 export default function Home() {
 
     const [data, setData] = useState<LeaderboardData | null>(null);
+    const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {
-        async function fetchData() {
-            const response = await getLeaderboardData();
-
-            setData(response);
-        }
-
-        fetchData();
+        getLeaderboardData().then(setData).catch(setError);
     }, []);
+
+    if (error) {
+        // Handled by error.tsx
+        throw error;
+    }
 
     if (!data) {
         return <Loading />;
@@ -53,14 +53,12 @@ export default function Home() {
 }
 
 async function getLeaderboardData(): Promise<LeaderboardData> {
-    const response = await fetch('/api/leaderboard', {
-        next: { revalidate: 960 },
-        method: 'GET',
-    });
+    const response = await fetch('/api/leaderboard');
+    const body = await response.json().catch(() => null) as LeaderboardData & { error?: string } | null;
 
-    if (!response.ok) {
-        throw new Error(`Failed to fetch leaderboard data: ${response.status}`);
+    if (!response.ok || !body) {
+        throw new Error(body?.error ?? `Failed to fetch leaderboard data: ${response.status}`);
     }
 
-    return response.json();
+    return body;
 }
